@@ -1,0 +1,31 @@
+/* 
+    Created on : 09/05/2020, 17:48:51
+    Author     : fabio
+*/
+
+.text-input
+{
+    -fx-background-radius: 20;
+    -fx-text-fill: #696969;
+    -fx-prompt-text-fill: #D4CEE3;
+}
+.button1
+{
+    -fx-background-color: #3CB371;
+    -fx-text-fill: #ffffff;
+}
+
+.button:hover
+{
+    -fx-font-size: 15px;
+}
+
+.button1:pressed
+{
+    -fx-text-fill: #550000;
+}
+
+.button1:active
+{
+    -fx-text-fill: #80AFF5;
+}

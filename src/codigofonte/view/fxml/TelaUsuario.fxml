@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="602.0" style="-fx-background-color: white;" stylesheets="@../css/estilo_usuario.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codigofonte.controller.UsuarioController">
+   <children>
+      <Button layoutY="320.0" mnemonicParsing="false" onAction="#novaConversa" prefHeight="66.0" prefWidth="73.0" style="-fx-background-color: white;" styleClass="button1">
+         <graphic>
+            <ImageView fitHeight="103.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" styleClass="button1">
+               <image>
+                  <Image url="@../imagens/interface.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      
+      <AnchorPane fx:id="paneArquivo" layoutX="622.0" layoutY="74.0" prefHeight="326.0" prefWidth="338.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="74.0">
+         <children>
+            <AnchorPane fx:id="panelLista" layoutX="14.0" layoutY="14.0" prefHeight="292.0" prefWidth="310.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <children>
+                    <JFXListView fx:id="idListView" layoutY="38.0" onMouseClicked="#mouseClicadoNaLista" prefHeight="251.0" prefWidth="310.0" styleClass="list-cell" stylesheets="@../css/estilo_usuario.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="41.0" />
+                  <TextField fx:id="procurarPorEmail" layoutX="14.0" layoutY="14.0" onAction="#procurarEmail" prefHeight="26.0" prefWidth="284.0" AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="panelCampo" prefHeight="326.0" prefWidth="338.0" styleClass="linear-grad2" visible="false">
+               <children>
+                  <HBox layoutY="273.0" prefHeight="52.0" prefWidth="338.0" AnchorPane.bottomAnchor="-12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="273.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#voltarLista" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: #A9A9A9; -fx-border-color: #808080;" styleClass="buttonVoltar" text="Voltar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagens/eletronicos.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="10.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnCopiar" mnemonicParsing="false" onAction="#copiarTexto" prefHeight="38.0" prefWidth="98.0" style="-fx-background-color: #A9A9A9; -fx-border-color: #808080;" text="Copiar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagens/copia-de.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" top="7.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label fx:id="idTitulo" layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="310.0" text="Título" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDeQuem" layoutX="14.0" layoutY="79.0" prefHeight="14.0" prefWidth="293.0" text="De quem" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTexto" layoutX="14.0" layoutY="107.0" prefHeight="168.0" prefWidth="310.0" text="Texto" textFill="WHITE" />
+                  <Label fx:id="lblDataDeEnvio" layoutX="14.0" layoutY="57.0" text="Data de envio" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneCarregar" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <children>
+                  <JFXProgressBar fx:id="idProgressBar" layoutX="55.0" layoutY="205.0" prefHeight="16.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="80.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagens/icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="45.0" layoutY="183.0" text="Carregando mensagens...">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblMensagem" layoutX="97.0" layoutY="378.0" onMouseClicked="#lblVerErro" prefHeight="16.0" prefWidth="116.0" text="Ocorreu um erro!" textAlignment="JUSTIFY" textFill="#ff0900" underline="true" visible="false">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
+      <AnchorPane layoutY="-2.0" prefHeight="65.0" prefWidth="602.0" styleClass="linear-grad">
+         <children>
+            <ImageView fx:id="imgVoltar" fitHeight="34.0" fitWidth="46.0" layoutX="14.0" layoutY="16.0" onMouseClicked="#voltarNoLogin" onMouseExited="#mouseSaiu" onMouseMoved="#mouseMovido" pickOnBounds="true" preserveRatio="true" styleClass="button2" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
+               <image>
+                  <Image url="@../imagens/setas-flechas.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnCarregar" layoutX="531.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnCarregarLista" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: wh;" styleClass="button3" AnchorPane.leftAnchor="531.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="11.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="button3">
+                     <image>
+                        <Image url="@../imagens/carregar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="txtEmail" editable="false" focusColor="#63ba4c" labelFloat="true" layoutX="14.0" layoutY="106.0" opacity="0.54" prefHeight="26.0" prefWidth="219.0" promptText="Seu e-mail">
+         <font>
+            <Font name="Ubuntu Light" size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="txtSenha" editable="false" focusColor="#63ba4c" labelFloat="true" layoutX="14.0" layoutY="153.0" opacity="0.54" prefHeight="26.0" prefWidth="219.0" promptText="Senha">
+         <font>
+            <Font name="Ubuntu Light" size="14.0" />
+         </font>
+      </JFXPasswordField>
+   </children>
+</AnchorPane>
