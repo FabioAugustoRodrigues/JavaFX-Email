@@ -23,7 +23,7 @@
                         <Image url="@../imagens/icon.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblForgot" layoutX="51.0" layoutY="261.0" prefHeight="21.0" prefWidth="191.0" text="Fábio Augusto Rodrigues" textFill="WHITE">
+                  <Label fx:id="lblForgot" layoutX="69.0" layoutY="261.0" prefHeight="21.0" prefWidth="191.0" text="Verificador de e-mails" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
