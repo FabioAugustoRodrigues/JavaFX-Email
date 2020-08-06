@@ -15,6 +15,11 @@ import javafx.stage.Stage;
  */
 public class EmailZ extends Application {
     
+    /*
+        ´necessário habilitar a opção de acesso a aplicativos menos seguros no seu email para podeÉ
+        logar no aplicativo   
+    */
+    
     // Atributos
     private static Stage stageX;
     private static Scene scene_user, scene_login;
