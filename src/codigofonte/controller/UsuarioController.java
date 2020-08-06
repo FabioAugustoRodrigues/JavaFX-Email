@@ -90,10 +90,7 @@ public class UsuarioController implements Initializable{
     
     @FXML
     private TextField procurarPorEmail;
-    
-    @FXML
-    private Button btnEstatistica;
-    
+   
     // Atributos da classe
     private ObservableList<String> obsLista;
     private List<ListaEmails> lista_emails;
@@ -309,7 +306,7 @@ public class UsuarioController implements Initializable{
                 "habilitado para ser usado em aplicativos como este.");
         alert.showAndWait();
     }
-    
+
     /*
         Quando o usuário clicar no TextField acima da lista e digitar nele o título de algum email e der enter
         aparecerá - caso o email digitado exista - na lista somente o email digitado.
