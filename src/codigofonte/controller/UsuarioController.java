@@ -191,8 +191,18 @@ public class UsuarioController implements Initializable{
         // Ou seja, um erro no login.
         if (this.lista_emails != null){
             try{
-                Parent form = FXMLLoader.load(getClass().getResource("/codigofonte/view/fxml/TelaEscrever.fxml"));
-
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/codigofonte/view/fxml/TelaEscrever.fxml"));
+                Parent form = loader.load();
+                //Parent form = FXMLLoader.load(getClass().getResource("/codigofonte/view/fxml/TelaEscrever.fxml"));
+                
+                /*
+                    Aqui pegamos o Controller que será usado na tela do formulário
+                    e chamamos o método "inserirDados" para passar o e-mail e a senha do usuário
+                    basicamente tudo isso serve para a passagem de parâmetro entre telas 
+                */
+                EscreverController escreverController = loader.<EscreverController>getController();
+                escreverController.inserirDados(emailUser.getEmail(), emailUser.getSenha());
+                
                 Stage stage = new Stage();
                 stage.setScene(new Scene(form));
                 stage.setTitle("Formulário");

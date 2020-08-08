@@ -51,6 +51,14 @@ public class EscreverController implements Initializable {
     }    
     
     /*
+        Método para inserir o e-mail e senha nos formulários
+    */
+    public void inserirDados(String email, String senha){
+        txtEmail.setText(email);
+        txtSenha.setText(senha);
+    }
+    
+    /*
         Quando o usuário clica no RadioButton, automaticamente abrirá a tela para selecionar um arquivo
     */
     @FXML
