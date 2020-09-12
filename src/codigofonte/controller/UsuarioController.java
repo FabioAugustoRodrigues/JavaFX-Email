@@ -34,6 +34,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * FXML Controller class
@@ -404,6 +409,25 @@ public class UsuarioController implements Initializable{
     }    
     
     /*
+        Configures the textfield to receive suggestions
+    */
+    public void loadAutoComplete(){
+        // Variables for autosuggestion :)
+        AutoCompletionBinding<String> acb;
+        Set<String> ps;
+        
+        ArrayList<String> values = new ArrayList();
+        for (int i = 0; i < lista_emails.size(); i++){
+            values.add(lista_emails.get(i).getTitulo());
+        }
+        
+        String[] _possibleSuggestions = values.toArray(new String[0]);
+        ps = new HashSet<>(Arrays.asList(_possibleSuggestions));
+        TextFields.bindAutoCompletion(procurarPorEmail, _possibleSuggestions);
+        
+    }
+    
+    /*
         Método para carregar a lista de dados
     */
     public void carregarLista(){
@@ -445,6 +469,9 @@ public class UsuarioController implements Initializable{
      
                             // Atualizando label de mensagem
                             lblMensagem.setText("");
+                            
+                            // Configura o textfield para receber sugestões de autocomplete
+                            loadAutoComplete();
 
                         }else{
                             // Exibindo erro
