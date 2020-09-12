@@ -5,8 +5,6 @@ Verificador de e-mails (cabeçalho das mensagens) utilizando a API JavaMail e Ja
 
 ![Abrindo mensagens](https://github.com/FabioAugustoRodrigues/JavaFX-Email/blob/master/screenshots/mensagensCarregadas.gif)
 
-![Carregando mensagens](https://github.com/FabioAugustoRodrigues/JavaFX-Email/blob/master/screenshots/carregando.gif)
-
 ## Obervações
 Para realizar o login, será necessário habilitar a opção de acesso a aplicativos menos seguros no seu email
 
