@@ -3,8 +3,6 @@ Verificador de e-mails (cabeçalho das mensagens) utilizando a API JavaMail e Ja
 
 ![Tela de Login](https://github.com/FabioAugustoRodrigues/JavaFX-Email/blob/master/screenshots/Tela%20de%20login.png)
 
-![Abrindo mensagens](https://github.com/FabioAugustoRodrigues/JavaFX-Email/blob/master/screenshots/mensagensCarregadas.gif)
-
 ## Obervações
 Para realizar o login, será necessário habilitar a opção de acesso a aplicativos menos seguros no seu email
 
