@@ -27,20 +27,10 @@ public class EmailZ extends Application {
     @Override
     public void start(Stage stage) throws Exception {
     
-        // Instanciando a tela de Login
-        /*
-            Nessa tela o usuário informa o e-mail a sua respectiva senha para 
-            poder entrar na tela de usuário
-        */
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("view/fxml/TelaLogin.fxml"));;
         Parent root = loader.load();
         scene_login = new Scene(root);
         
-        // Instanciando a tela de usuario
-        /*
-            Nessa tela, após o usuário ter feito o login, o usuário poderá ver os e-mails recebidos
-            e enviar e-mails
-        */
         Parent root2 = FXMLLoader.load(getClass().getResource("view/fxml/TelaUsuario.fxml"));
         scene_user = new Scene(root2);
 
@@ -75,7 +65,6 @@ public class EmailZ extends Application {
         }
     }
     
-    // Sobrecarga
     public static void changeScreen(String tela){
         changeScreen(tela, null);
     }
@@ -97,7 +86,6 @@ public class EmailZ extends Application {
         }
     }
     
-    // MÉTODO MAIN
     public static void main(String[] args) {
         launch(args);
     }

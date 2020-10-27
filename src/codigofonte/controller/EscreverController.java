@@ -27,7 +27,6 @@ import javax.mail.internet.InternetAddress;
  */
 public class EscreverController implements Initializable {
 
-    // Atributos do JAVAFX
     @FXML
     private JFXTextField txtEmail;
     @FXML
@@ -65,8 +64,6 @@ public class EscreverController implements Initializable {
     void colocarAnexo(ActionEvent event) {
         
         if (radioAnexo.isSelected()){
-            // Caso o componente radioAnexo esteja selecionado, ele abre a caixa de arquivos
-            // para o usuário selecionar o anexo que deseja enviar por e-mail
             
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
@@ -87,7 +84,6 @@ public class EscreverController implements Initializable {
     @FXML
     private void enviarEmail(ActionEvent event) {
         
-        // Verificando se todos os campos foram preenchidos
         if (txtPara.getText().isEmpty() || txtTitulo.getText().isEmpty() || txtTexto.getText().isEmpty()){
             Alert alert =  new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
@@ -104,7 +100,6 @@ public class EscreverController implements Initializable {
                 result = false;
             }
             
-            // Verificando se o email destinatário é valido
             if (result){
                 
                 boolean env = true;
@@ -117,7 +112,6 @@ public class EscreverController implements Initializable {
                         txtSenha.getText(), null);
                 }
                 
-                // Por fim, enviando o e-mail
                 if (env){
                     
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -126,8 +120,7 @@ public class EscreverController implements Initializable {
                     alert.setContentText("Email enviado com sucesso!");
 
                     alert.show();
-                    
-                    // Limpando todos os formulários
+      
                     txtEmail.setText("");
                     txtPara.setText("");
                     txtSenha.setText("");

@@ -19,7 +19,6 @@ import javafx.scene.control.Label;
  */
 public class MainController implements Initializable {
     
-    // Atrobutos do JAVAFX
     private Label label;
     @FXML
     private Label lblForgot;
@@ -52,11 +51,9 @@ public class MainController implements Initializable {
             ControlarEmails ctEmail = new ControlarEmails(txtEmail.getText(), txtSenha.getText());
             
             if (ctEmail.validarEmail()){
-                
-                // Chamando a tela de usuário
+     
                 EmailZ.changeScreen("Usuario", ctEmail);
                         
-                // Limpando os formulários
                 txtEmail.setText("");
                 txtSenha.setText("");
                         

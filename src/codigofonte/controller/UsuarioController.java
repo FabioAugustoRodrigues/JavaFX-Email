@@ -47,7 +47,6 @@ import java.util.Set;
  */
 public class UsuarioController implements Initializable{
     
-    // Atributos do JAVAFX
     @FXML
     private ImageView imgVoltar;
     
@@ -112,17 +111,14 @@ public class UsuarioController implements Initializable{
     void mouseClicadoNaLista(MouseEvent event) {
 
         if (this.lista_emails != null && idListView.getSelectionModel().getSelectedIndex() != -1){
-            
-            // Primeiramente vamos decidir qual tela irá aprecer
-            panelLista.setVisible(false); // A tela de lista, não ficará vísivel para poder ver o conteúdo
-            panelCampo.setVisible(true); // A tela do conteúdo começa a ser vísivel
+    
+            panelLista.setVisible(false); 
+            panelCampo.setVisible(true); 
 
-            // Inserindo os dados na tela de conteúdo
             idTitulo.setText(idListView.getSelectionModel().getSelectedItem()); 
 
-            idTitulo.setMaxSize(330, 33); // Definindo um tamanho para o título
-
-            // Pegando a localização dos dados restantes num array
+            idTitulo.setMaxSize(330, 33); 
+           
             int id = 0;
 
             for (int i = 0; i < lista_emails.size(); i++){
@@ -132,20 +128,14 @@ public class UsuarioController implements Initializable{
                 }
             }
 
-            // Inserindo nas labels os dados
-            
-            // Iserindo o nome de quem enviou o email
             lblDeQuem.setText(lista_emails.get(id).getDeQuem());
-            lblDeQuem.setMaxSize(330, 14); // Ajustando tamanho
+            lblDeQuem.setMaxSize(330, 14);
             
-            // Inserindo o texto
             lblTexto.setText(lista_emails.get(id).getTexto());
             lblTexto.setMaxSize(330, 166);
-            
-            // Pegando a data formatada em BR           
+                  
             ConverterData cvData = new ConverterData(lista_emails.get(id).getData());
             
-            // Mandando para a label
             lblDataDeEnvio.setText("Data de envio: " + cvData.getFormatacaoBR());
         }
     }
@@ -158,16 +148,12 @@ public class UsuarioController implements Initializable{
     @FXML
     void btnCarregarLista(ActionEvent event) {
         
-        // Verificamos se a lista não é nula
         if (this.lista_emails != null){
             
-            // Alterando a visibilidade dos painés
             paneCarregar.setVisible(true);
             panelLista.setVisible(false);
             panelCampo.setVisible(false);
-            
-            // Primeiramente removemos todos os itens atuais da lista
-            // Caso não seja removido, ao atualizá-la, os itens seria adicionado, ou seja, duplicaria
+
             idListView.getItems().remove(0, this.lista_emails.size());
 
             // Carregando a lista
@@ -191,20 +177,11 @@ public class UsuarioController implements Initializable{
     */
     @FXML
     void novaConversa(ActionEvent event) {
-        
-        // Lembrando que quando o emailUser é nulo, é por que ocorreu um erro para resgatar os dados
-        // Ou seja, um erro no login.
         if (this.lista_emails != null){
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/codigofonte/view/fxml/TelaEscrever.fxml"));
                 Parent form = loader.load();
-                //Parent form = FXMLLoader.load(getClass().getResource("/codigofonte/view/fxml/TelaEscrever.fxml"));
-                
-                /*
-                    Aqui pegamos o Controller que será usado na tela do formulário
-                    e chamamos o método "inserirDados" para passar o e-mail e a senha do usuário
-                    basicamente tudo isso serve para a passagem de parâmetro entre telas 
-                */
+
                 EscreverController escreverController = loader.<EscreverController>getController();
                 escreverController.inserirDados(emailUser.getEmail(), emailUser.getSenha());
                 
@@ -249,7 +226,6 @@ public class UsuarioController implements Initializable{
     @FXML
     void copiarTexto(ActionEvent event) {
         
-        // Pegando a localização dos dados restantes num array
         int id = 0;
 
         for (int i = 0; i < lista_emails.size(); i++){
@@ -260,7 +236,6 @@ public class UsuarioController implements Initializable{
         }
 
         try{
-            // Copiando o texto
             final Clipboard clip=Toolkit.getDefaultToolkit().getSystemClipboard();
             StringSelection ss = new StringSelection(lista_emails.get(id).getTexto());
             clip.setContents(ss, ss);
@@ -279,26 +254,19 @@ public class UsuarioController implements Initializable{
         
         try{
             
-            // Verifcamos se a tela de carregamento está ativa, caso esteja ativa
-            // não podemos voltar para a área de login
             if (!paneCarregar.isVisible()){
-                // Se lista_emails não for nulo, removemos todo o conteúdo da lista
-                // Caso for nulo, não removemos nada, pelo simples fato de não haver algo nela mesmo
+
                 if (this.lista_emails != null){
                     idListView.getItems().remove(0, this.lista_emails.size());
                 }
 
-                // Atualizando a mensagem
                 lblMensagem.setText("");
 
-                // Atualizando as telas
                 panelCampo.setVisible(false);
                 panelLista.setVisible(true);
-                
-                // "Limpando" os dados da lista_emails
+          
                 this.lista_emails = null;
                 
-                // Por fim, chamando a tela de login
                 EmailZ.changeScreen("Login", null);
             }
             
@@ -330,49 +298,34 @@ public class UsuarioController implements Initializable{
     @FXML
     void procurarEmail(ActionEvent event) {
   
-        // Primeiro verificamos se a lista de emails não é nula
         if (lista_emails != null){
             
-            // Criando um array para armazenar apenas os títulos
             ArrayList<String> titulos = new ArrayList();
             
-            /*
-                Observação: a váriavel "conteudoOriginal" serve para indicarmos se na lista
-                há todos os emails ou apenas os emails pesquisados no TextField.
-                Caso esteja todos os emails, o "conteudoOriginal" será true, caso contrário será false
-            */
             if (!conteudoOriginal && procurarPorEmail.getText().equals("")){
                 
-                // Inserindo no array "titulos", os titulos de todos os e-mails lidos
                 for (int i = 0; i < lista_emails.size(); i++){
                     titulos.add(lista_emails.get(i).getTitulo());
                 }
 
-                // Inserindo os dados no ListView
                 obsLista = FXCollections.observableArrayList(titulos);
                 idListView.setItems(obsLista);
 
-                // Atualizando label de mensagem
                 lblMensagem.setText("");
 
-                // Como inserimos denovo todos os emails, conteudoOriginal será true
                 conteudoOriginal = true;
             }else{
-                // Inserindo no array "titulos", os titulos de todos os e-mails lidos
                 for (int i = 0; i < lista_emails.size(); i++){
                     if (lista_emails.get(i).getTitulo().equalsIgnoreCase(procurarPorEmail.getText())){
                         titulos.add(lista_emails.get(i).getTitulo());
                     }
                 }
 
-                // Inserindo os dados no ListView
                 obsLista = FXCollections.observableArrayList(titulos);
                 idListView.setItems(obsLista);
 
-                // Atualizando label de mensagem
                 lblMensagem.setText("");
 
-                // conteudoOriginal será false, por que a lista tem somente os emails pesquisados
                 conteudoOriginal = false;
             }
         }
@@ -385,23 +338,18 @@ public class UsuarioController implements Initializable{
             @Override
             public void onScreenChange(String newScreen, ControlarEmails ctEmail) {
                 
-                // Alterando a visibilidade dos painés, para que toda vez que passe pelo initializa
-                // o primeiro painel a aparecer seja o que carrega um ProgressBar
                 paneCarregar.setVisible(true);
                 panelLista.setVisible(false);
                 panelCampo.setVisible(false);
                 
                 // Alterando a visibilidade do Label de mensagem de erro
                 // lblMensagem.setVisible(false);
-                
-                // Recebendo objeto que tem o e-mail e a senha do usuário logado
+
                 emailUser = ctEmail;
-                
-                // Inserindo dados nos formulários
+ 
                 txtEmail.setText(emailUser.getEmail());
                 txtSenha.setText(emailUser.getSenha());
                 
-                // Carregando lista de dados
                 carregarLista();
             }
         });
@@ -448,47 +396,32 @@ public class UsuarioController implements Initializable{
                         
                         if (lista_emails != null){
 
-                            // Criando um array para armazenar apenas os títulos
                             ArrayList<String> titulos = new ArrayList();
 
-                            // Inserindo no array "titulos", os titulos de todos os e-mails lidos
                             for (int i = 0; i < lista_emails.size(); i++){
                                 titulos.add(lista_emails.get(i).getTitulo());
                             }
 
-                            // Inserindo os dados no ListView
                             obsLista = FXCollections.observableArrayList(titulos);
                             idListView.setItems(obsLista);
                        
-                            /*
-                                Observação: a váriavel "conteudoOriginal" serve para indicarmos se na lista
-                                há todos os emails ou apenas os emails pesquisados em um TextField.
-                                Caso esteja todos os emails, o "conteudoOriginal" será true, caso contrário será false
-                            */
                             conteudoOriginal = true;
      
-                            // Atualizando label de mensagem
                             lblMensagem.setText("");
                             
-                            // Configura o textfield para receber sugestões de autocomplete
                             loadAutoComplete();
 
                         }else{
-                            // Exibindo erro
                             lblMensagem.setVisible(true);
-                            // Fazendo com que o panel da lista não fique visivel
                             panelLista.setVisible(false);
                         }
 
                     }catch(Exception error){
-                        // Exibindo erro
                         lblMensagem.setVisible(true);
-                        // Fazendo com que o panel da lista não fique visivel
                         // panelLista.setVisible(false);
                         
                         System.out.println("ERRO: " + error.getMessage());
                     }finally{
-                        // Atualizando visibilidade dos Painés
                         paneCarregar.setVisible(false);
                         panelLista.setVisible(true);
                     }
@@ -496,7 +429,6 @@ public class UsuarioController implements Initializable{
 
             }.start();
         }catch(Exception error){
-            // Exibindo erro
             lblMensagem.setVisible(true);
         }
     }

@@ -26,7 +26,6 @@ public class LendoEmails {
         
         try {
 
-            // criar campo de propriedades
             Properties properties = new Properties();
 
             properties.put("mail.pop3.host", host);
@@ -34,22 +33,18 @@ public class LendoEmails {
             properties.put("mail.pop3.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
 
-            // crie o objeto de armazenamento POP3 e conecte-se ao servidor pop
             Store store = emailSession.getStore("pop3s");
            
             store.connect(host, user, password);
             
-            // crie o objeto da pasta e abra-o
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
 
-            // recuperar as mensagens da pasta em uma matriz
             Message[] messages = emailFolder.getMessages();
 
             int x = 1;
             String data = null;
     
-            // iterando e recuperando os dados num ArrayList de ListaEmails
             for (int i = 0; i < messages.length; i++){
                 
                 x = i+1;
@@ -62,7 +57,6 @@ public class LendoEmails {
                
             }
             
-            // fechar os objetos de armazenamento e pasta
             emailFolder.close(false);
             store.close();
 
