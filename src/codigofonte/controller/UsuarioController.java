@@ -100,6 +100,7 @@ public class UsuarioController implements Initializable{
     private List<ListaEmails> lista_emails;
     private ControlarEmails emailUser;
     private boolean conteudoOriginal;
+    private ListaEmails emailAberto;
     
     // == Métodos ===================================================================
     
@@ -111,7 +112,7 @@ public class UsuarioController implements Initializable{
     void mouseClicadoNaLista(MouseEvent event) {
 
         if (this.lista_emails != null && idListView.getSelectionModel().getSelectedIndex() != -1){
-    
+            
             panelLista.setVisible(false); 
             panelCampo.setVisible(true); 
 
@@ -128,15 +129,20 @@ public class UsuarioController implements Initializable{
                 }
             }
 
-            lblDeQuem.setText(lista_emails.get(id).getDeQuem());
+            emailAberto = new ListaEmails(lista_emails.get(id).getTitulo(), lista_emails.get(id).getDeQuem(),
+                                        lista_emails.get(id).getTexto(), lista_emails.get(id).getData());
+            
+            lblDeQuem.setText(emailAberto.getDeQuem());
             lblDeQuem.setMaxSize(330, 14);
             
-            lblTexto.setText(lista_emails.get(id).getTexto());
+            lblTexto.setText(emailAberto.getTexto());
             lblTexto.setMaxSize(330, 166);
                   
-            ConverterData cvData = new ConverterData(lista_emails.get(id).getData());
+            ConverterData cvData = new ConverterData(emailAberto.getData());
             
             lblDataDeEnvio.setText("Data de envio: " + cvData.getFormatacaoBR());
+            
+            
         }
     }
     
@@ -169,6 +175,7 @@ public class UsuarioController implements Initializable{
     void voltarLista(ActionEvent event) {
         panelCampo.setVisible(false);
         panelLista.setVisible(true);
+        emailAberto = null;
     }
     
     /*
@@ -225,26 +232,18 @@ public class UsuarioController implements Initializable{
     */
     @FXML
     void copiarTexto(ActionEvent event) {
-        
-        int id = 0;
-
-        for (int i = 0; i < lista_emails.size(); i++){
-            if (idTitulo.getText().equals(lista_emails.get(i).getTitulo())){
-                id = i;
-                break;
+        if (this.emailAberto != null){
+            try{
+                final Clipboard clip=Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection ss = new StringSelection(this.emailAberto.getTexto());
+                clip.setContents(ss, ss);
+            }catch(Exception error){
+                Alert alert =  new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRO");
+                alert.setHeaderText("Erro ao copiar ao texto");
+                alert.setContentText(null);
+                alert.showAndWait();
             }
-        }
-
-        try{
-            final Clipboard clip=Toolkit.getDefaultToolkit().getSystemClipboard();
-            StringSelection ss = new StringSelection(lista_emails.get(id).getTexto());
-            clip.setContents(ss, ss);
-        }catch(Exception error){
-            Alert alert =  new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRO");
-            alert.setHeaderText("Erro ao copiar ao texto");
-            alert.setContentText(null);
-            alert.showAndWait();
         }
     }
     
@@ -349,6 +348,8 @@ public class UsuarioController implements Initializable{
  
                 txtEmail.setText(emailUser.getEmail());
                 txtSenha.setText(emailUser.getSenha());
+                
+                emailAberto = null;
                 
                 carregarLista();
             }
